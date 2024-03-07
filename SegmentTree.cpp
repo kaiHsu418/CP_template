@@ -50,6 +50,22 @@ public:
         }
     }
 
+    void updateSingle(int a, int val){
+        if(start == a && end == a){
+            info = val;
+            return;
+        }
+        if(a < start || a > end){
+            return;
+        }
+        if(left){
+            pushDown();
+            left->updateSingle(a, val);
+            right->updateSingle(a, val);
+            info = left->info+right->info;
+        }
+    }
+    
     void updateRangeBy(int a, int b, int val){
         if(b < start || a > end){
             return;
